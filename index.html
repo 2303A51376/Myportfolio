@@ -1,30 +1,33 @@
-<body>
-  <header>
-    <h1>Your Name</h1>
-    <p>Email: your.email@example.com | Phone: +91-XXXXXXXXXX</p>
-  </header>
-  <section id="education">
-    <h2>Education</h2>
-    <ul>
-      <li><strong>B.Tech in Computer Science</strong> - 2025, ABC University</li>
-      <li><strong>Intermediate (MPC)</strong> - 2021, XYZ Junior College</li>
-      <li><strong>SSC</strong> - 2019, LMN High School</li>
-    </ul>
-  </section>
+# -----------------------------
+# Example 2: Website Development
+# -----------------------------
+class WebPage(Prototype):
+    def __init__(self, page_type, header, footer, body_content):
+        self.page_type = page_type
+        self.header = header
+        self.footer = footer
+        self.body_content = body_content
 
- 
-  <section id="experience">
-    <h2>Work & Internship Experience</h2>
-    <article>
-      <h3>Software Intern - TechCorp</h3>
-      <p><em>Jan 2024 - Jun 2024</em></p>
-      <p>Worked on developing front-end features using HTML, CSS, and JavaScript.</p>
-    </article>
-    <article>
-      <h3>Web Development Intern - CodeLabs</h3>
-      <p><em>Jun 2023 - Aug 2023</em></p>
-      <p>Developed responsive websites and implemented REST APIs.</p>
-    </article>
-  </section>
-</body>
+    def set_body_content(self, content):
+        self.body_content = content
 
+    def show_page(self):
+        print(f"[{self.page_type} Page]")
+        print(f"Header: {self.header}")
+        print(f"Content: {self.body_content}")
+        print(f"Footer: {self.footer}\n")
+
+
+# Test
+if __name__ == "__main__":
+    print("=== Website Development Example ===")
+    homepage = WebPage("Home", "Welcome to MySite", "© 2025 MySite", "Main features and highlights")
+    homepage.show_page()
+
+    # Clone homepage into a Product Page
+    product_page = homepage.clone()
+    product_page.page_type = "Product"
+    product_page.set_body_content("Details of Product X, pricing, and reviews")
+    product_page.show_page()
+
+    homepage.show_page()  # Original unchanged
