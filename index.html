@@ -1,33 +1,52 @@
-# -----------------------------
-# Example 2: Website Development
-# -----------------------------
-class WebPage(Prototype):
-    def __init__(self, page_type, header, footer, body_content):
-        self.page_type = page_type
+import copy
+
+class WebPageTemplate:
+    def __init__(self, title, header, footer, content_blocks):
+        self.title = title
         self.header = header
         self.footer = footer
-        self.body_content = body_content
+        self.content_blocks = content_blocks  # list of content sections
 
-    def set_body_content(self, content):
-        self.body_content = content
+    def clone(self):
+        return copy.deepcopy(self)
 
-    def show_page(self):
-        print(f"[{self.page_type} Page]")
-        print(f"Header: {self.header}")
-        print(f"Content: {self.body_content}")
-        print(f"Footer: {self.footer}\n")
+    def update_content(self, new_blocks):
+        self.content_blocks = new_blocks
+
+    def display(self):
+        print(f"📄 Page Title: {self.title}")
+        print(f"🔝 Header: {self.header}")
+        print("📦 Content Blocks:")
+        for block in self.content_blocks:
+            print(f"   - {block}")
+        print(f"🔚 Footer: {self.footer}")
+        print("-" * 50)
 
 
-# Test
-if __name__ == "__main__":
-    print("=== Website Development Example ===")
-    homepage = WebPage("Home", "Welcome to MySite", "© 2025 MySite", "Main features and highlights")
-    homepage.show_page()
+# 🔹 Base Template
+base_template = WebPageTemplate(
+    title="Base Page",
+    header="Welcome to Our Website",
+    footer="© 2025 WebLaunch Inc.",
+    content_blocks=["Intro Section", "Feature Highlights", "Call to Action"]
+)
 
-    # Clone homepage into a Product Page
-    product_page = homepage.clone()
-    product_page.page_type = "Product"
-    product_page.set_body_content("Details of Product X, pricing, and reviews")
-    product_page.show_page()
+# 🔹 Clone for Home Page
+home_page = base_template.clone()
+home_page.title = "Home"
+home_page.update_content(["Hero Banner", "Latest News", "Newsletter Signup"])
 
-    homepage.show_page()  # Original unchanged
+# 🔹 Clone for About Page
+about_page = base_template.clone()
+about_page.title = "About Us"
+about_page.update_content(["Company History", "Team Profiles", "Mission Statement"])
+
+# 🔹 Display Pages
+print("✅ Home Page:")
+home_page.display()
+
+print("✅ About Page:")
+about_page.display()
+
+print("✅ Base Template (Unchanged):")
+base_template.display()
